@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>SLIP GAJI Konsultan Pengawas</title>
+    <title>SLIP GAJI POS E-Emas</title>
     <style>
         /* -------------------------------------
           GLOBAL RESETS
@@ -393,7 +393,7 @@
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="content-block">
-                                    <span class="apple-link">Konsultan Pengawas</span>
+                                    <span class="apple-link">POS E-Emas</span>
                                     <br> Email Notification <a href="#"></a>.
                                 </td>
                             </tr>

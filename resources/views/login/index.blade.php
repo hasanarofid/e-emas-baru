@@ -1,6 +1,6 @@
 @extends('login.base')
 
-@section('title', 'Konsultan Pengawas | Login')
+@section('title', 'POS E-Emas | Login')
 
 @section('content')
     <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
@@ -8,7 +8,7 @@
             @csrf
 
             <span class="login100-form-title p-b-37">
-                Konsultan Pengawas
+                POS E-Emas
             </span>
 
             <div class="wrap-input100 validate-input m-b-20" data-validate="Enter username or email">

@@ -27,7 +27,7 @@
     <div class="panel bg-info">
         <div class="panel-heading">
             <em>
-                <h6>Ini adalah halaman yang menampilkan semua role di dalam Konsultan Pengawas ini, secara default hanya
+                <h6>Ini adalah halaman yang menampilkan semua role di dalam POS E-Emas ini, secara default hanya
                     Admin yang bisa mengedit fungsi role.
                 </h6>
             </em>

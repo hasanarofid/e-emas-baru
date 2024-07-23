@@ -358,7 +358,7 @@
 </head>
 
 <body class="">
-    <span class="preheader">Pengajuan Cuti Pegawai di Konsultan Pengawas!!</span>
+    <span class="preheader">Pengajuan Cuti Pegawai di POS E-Emas!!</span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
         <tr>
             <td>&nbsp;</td>
@@ -432,7 +432,7 @@
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="content-block">
-                                    <span class="apple-link">Konsultan Pengawas</span>
+                                    <span class="apple-link">POS E-Emas</span>
                                     <br> Email Notification <a href="#"></a>.
                                 </td>
                             </tr>

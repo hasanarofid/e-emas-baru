@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Konsultan Pengawas | @yield('title')</title>
+    <title>POS E-Emas | @yield('title')</title>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <link rel="shortcut icon" href="{{ URL::to('/img') }}/favicon.ico" type="image/x-icon">
@@ -129,7 +129,7 @@
                     @yield('content')
 
                     <!-- Footer -->
-                    <div class="footer text-muted">&copy; {{ date('Y') }}. <a href="#">Konsultan Pengawas</a> by <a
+                    <div class="footer text-muted">&copy; {{ date('Y') }}. <a href="#">POS E-Emas</a> by <a
                             href="#" target="_blank">Bimantoro</a>
                     </div>
                     <!-- /footer -->

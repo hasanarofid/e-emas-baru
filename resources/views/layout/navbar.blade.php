@@ -2,7 +2,7 @@
 <div class="navbar-header">
     <a class="navbar-brand" href="{{ url('/superAdmin') }}"><img src="{{ URL::to('/img') }}/favicon.ico"
             alt="">
-    <p style="margin-left: 30px;margin-top: -15px !important;">Konsultan Pengawas</p>
+    <p style="margin-left: 30px;margin-top: -15px !important;">POS E-Emas</p>
         </a>
 
     <ul class="nav navbar-nav visible-xs-block">

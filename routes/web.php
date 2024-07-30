@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\LokasiController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Controller;
@@ -395,6 +396,10 @@ Route::group(['middleware' => ['auth']], function () {
     // lokasi
     Route::resource('lokasi', LokasiController::class);
     Route::get('/lokasi/destroy/{data}', [LokasiController::class, 'destroy'])->name('lokasi.destroy');
+
+    // kategori
+    Route::resource('kategori', KategoriController::class);
+    Route::get('/kategori/destroy/{data}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 
     
 });

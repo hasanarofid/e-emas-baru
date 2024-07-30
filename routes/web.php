@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CutiController;
 use App\Http\Controllers\LaporanUmumController;
@@ -385,6 +386,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     //download file
     Route::get('downloadfile/{file}', [MasterDokumenController::class, 'downloadfile'])->name('downloadfile');
+    
+
+    //e-emas menu2
+    // user
+    Route::resource('user', UserController::class);
 
     
 });

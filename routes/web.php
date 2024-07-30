@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\LokasiController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CutiController;
@@ -59,7 +60,6 @@ use App\Http\Controllers\TunjanganController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
-
 
 
 Route::get('/clear-cache', function() {
@@ -391,6 +391,10 @@ Route::group(['middleware' => ['auth']], function () {
     //e-emas menu2
     // user
     Route::resource('user', UserController::class);
+
+    // lokasi
+    Route::resource('lokasi', LokasiController::class);
+    Route::get('/lokasi/destroy/{data}', [LokasiController::class, 'destroy'])->name('lokasi.destroy');
 
     
 });

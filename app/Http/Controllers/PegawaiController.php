@@ -31,10 +31,10 @@ class PegawaiController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    function __construct()
-    {
-        $this->middleware('permission:menu-pegawai', ['all']);
-    }
+    // function __construct()
+    // {
+    //     $this->middleware('permission:menu-pegawai', ['all']);
+    // }
 
     public function index()
     {

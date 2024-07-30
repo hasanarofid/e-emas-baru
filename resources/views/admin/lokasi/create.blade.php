@@ -7,7 +7,7 @@
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-cash3"></i> <span class="text-semibold">Data Gaji</span>
+                <h4><i class="icon-cash3"></i> <span class="text-semibold">Data Master Toko/Cabang</span>
                     - Tambah Data Lokasi</h4>
             </div>
 
@@ -55,34 +55,64 @@
                 </div>
 
                 <div class="row">
+                    
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Nama</label>
-                            <input type="text" name="nama" class="form-control" placeholder="Nama Lokasi . . . "
-                                value="{{ old('nama') }}">
+                            <input type="text" name="name" class="form-control" placeholder="Nama Lokasi . . . "
+                                value="{{ old('name') }}">
 
-                            @if ($errors->has('nama'))
+                            @if ($errors->has('name'))
                                 <div class="text-danger">
-                                    {{ $errors->first('nama') }}
+                                    {{ $errors->first('name') }}
                                 </div>
                             @endif
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group ">
-                            <label for="">Jumlah</label>
-                            <input type="text" name="nama" class="form-control" placeholder="Nama Lokasi . . . "
-                            value="{{ old('nama') }}">
+                            <label for="">Alamat</label>
+                            <input type="text" name="address" class="form-control" placeholder="Alamat Lokasi . . . "
+                                value="{{ old('address') }}">
 
-                        @if ($errors->has('nama'))
-                            <div class="text-danger">
-                                {{ $errors->first('nama') }}
-                            </div>
-                        @endif
-
+                            @if ($errors->has('address'))
+                                <div class="text-danger">
+                                    {{ $errors->first('address') }}
+                                </div>
+                            @endif
                         </div>
-
                     </div>
+
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Kota</label>
+                            <input type="text" name="city" class="form-control" placeholder="Nama Kota . . . "
+                                value="{{ old('city') }}">
+
+                            @if ($errors->has('city'))
+                                <div class="text-danger">
+                                    {{ $errors->first('city') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label for="">Provinsi</label>
+                            <input type="text" name="province" class="form-control" placeholder="Alamat Provinsi . . . "
+                                value="{{ old('province') }}">
+
+                            @if ($errors->has('province'))
+                                <div class="text-danger">
+                                    {{ $errors->first('province') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+
                 </div>
 
                 <div class="text-right mt-3">

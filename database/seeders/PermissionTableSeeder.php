@@ -28,7 +28,7 @@ class PermissionTableSeeder extends Seeder
             'menu-surat-peringatan',
             'menu-export-kinerja',
             'manajemen-perusahaan',
-            'dashboard-pengawas', // Add the new permission here
+            'menu-admin-emas', // Add the new permission here
         ];
 
         foreach ($permissions as $permission) {

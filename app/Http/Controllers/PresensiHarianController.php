@@ -25,7 +25,7 @@ class PresensiHarianController extends Controller
 
     // public function __construct()
     // {
-    //     $this->middleware(['permission:menu-staff', 'permission:dashboard-pengawas']);
+    //     $this->middleware(['permission:menu-staff', 'permission:dashboard-admin-emas']);
     // }
     public function index()
     {

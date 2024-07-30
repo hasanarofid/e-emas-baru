@@ -2084,7 +2084,7 @@ CREATE TABLE `pegawai` (
 INSERT INTO `pegawai` (`id`, `id_role`, `nik`, `nama`, `jk`, `agama`, `tempat_lahir`, `tgl_lahir`, `alamat_ktp`, `alamat_dom`, `status`, `jml_anak`, `no_hp`, `email`, `password`, `tgl_masuk`, `id_atasan`, `id_jabatan`, `id_divisi`, `path`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (24060001, 1, '3307800512068339', 'Bangbang Bimantoro', 'Pria', 'Islam', 'Lubuklinggau', '2002-07-28', 'Ds. Bappenas No. 399', 'Jr. Ters. Buah Batu No. 238', 'Menikah', 5, '0519 5509 859', 'admin@gmail.com', '$2y$10$1t3oAJOTP/bIIUTuPgeQsO2WhGwGfYKTyD5zm43quC50.YOGbBU7O', '1997-01-17', NULL, 8, 3, 'foto.jpg', NULL, '2024-06-17 05:17:01', '2024-06-17 05:17:01', NULL),
 (24060002, 2, '6571334808151579', 'Bangbang Bimantoro', 'Pria', 'Islam', 'Singkawang', '2011-01-10', 'Jln. Thamrin No. 471', 'Kpg. Taman No. 54', 'Menikah', 2, '(+62) 437 8458 279', 'hrd@gmail.com', '$2y$10$IA9WBPRaAojOIu.5Hlq89eqB.64irU4zoQT5U4Tu6PApA129TgVbm', '1993-03-28', NULL, 1, 3, 'foto.jpg', NULL, '2024-06-17 05:17:01', '2024-06-17 05:17:01', NULL),
-(24060003, 5, '3207886810135213', 'Hasan Arofid', 'Pria', 'Islam', 'Pagar Alam', '1982-06-24', 'Gg. Dipatiukur No. 886', 'Jln. B.Agam Dlm No. 354', 'Menikah', 4, '(+62) 383 6456 4419', 'pengawas@gmail.com', '$2y$10$M.1C5c/aXNgg7QwdbrZsoeirDHGYfGs66B/DH7g9PS.j9Rv6tj9Y.', '2019-01-31', NULL, 5, 3, 'foto.jpg', NULL, '2024-06-17 05:17:02', '2024-07-10 19:53:12', NULL);
+(24060003, 5, '3207886810135213', 'Hasan Arofid', 'Pria', 'Islam', 'Pagar Alam', '1982-06-24', 'Gg. Dipatiukur No. 886', 'Jln. B.Agam Dlm No. 354', 'Menikah', 4, '(+62) 383 6456 4419', 'admin1@gmail.com', '$2y$10$M.1C5c/aXNgg7QwdbrZsoeirDHGYfGs66B/DH7g9PS.j9Rv6tj9Y.', '2019-01-31', NULL, 5, 3, 'foto.jpg', NULL, '2024-06-17 05:17:02', '2024-07-10 19:53:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -2192,7 +2192,7 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (12, 'menu-surat-peringatan', 'web', '2024-06-17 05:17:01', '2024-06-17 05:17:01'),
 (13, 'menu-export-kinerja', 'web', '2024-06-17 05:17:01', '2024-06-17 05:17:01'),
 (14, 'manajemen-perusahaan', 'web', '2024-06-17 05:17:01', '2024-06-17 05:17:01'),
-(16, 'dashboard-pengawas', 'web', '2024-06-30 06:00:37', '2024-06-30 06:00:37');
+(16, 'dashboard-admin-emas', 'web', '2024-06-30 06:00:37', '2024-06-30 06:00:37');
 
 -- --------------------------------------------------------
 
@@ -2569,7 +2569,7 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 (1, 'ADMIN', 'web', '2024-06-17 05:17:01', '2024-06-17 05:17:01'),
 (2, 'HRD', 'web', '2024-06-17 05:17:01', '2024-06-17 05:17:01'),
 (3, 'STAFF', 'web', '2024-06-17 05:17:01', '2024-06-17 05:17:01'),
-(5, 'PENGAWAS', 'web', '2024-07-10 19:46:42', '2024-07-10 19:46:42');
+(5, 'ADMIN-EMAS', 'web', '2024-07-10 19:46:42', '2024-07-10 19:46:42');
 
 -- --------------------------------------------------------
 

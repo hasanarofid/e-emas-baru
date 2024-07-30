@@ -55,8 +55,25 @@ use App\Http\Controllers\SuratPemberitahuanController;
 use App\Http\Controllers\SuratPeringatanController;
 use App\Http\Controllers\SuratUndanganRapatController;
 use App\Http\Controllers\TunjanganController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+
+
+
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    
+    // For Laravel versions older than 5.5
+    if (class_exists('Artisan') && method_exists(Artisan::class, 'call')) {
+        Artisan::call('optimize');
+    }
+
+    return "Cache is cleared";
+});
 
 /*
 |--------------------------------------------------------------------------

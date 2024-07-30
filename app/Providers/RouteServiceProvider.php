@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/staff';
+    public const HOME = '/pengawasDashboard';
 
     /**
      * The controller namespace for the application.

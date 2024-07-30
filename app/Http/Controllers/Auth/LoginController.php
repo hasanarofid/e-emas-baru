@@ -53,9 +53,11 @@ class LoginController extends Controller
             return redirect()->route('hrd.index');
         }else if ($user->hasRole('ADMIN-EMAS')) {
             return redirect()->route('pengawasDashboard.index');
+        }else{
+            return redirect()->route('pengawasDashboard.index');
         }
 
-        return redirect()->route('staff.index');
+        // return redirect()->route('staff.index');
     }
 
     protected function sendFailedLoginResponse(Request $request)

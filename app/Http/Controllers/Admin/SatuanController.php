@@ -3,24 +3,25 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\emas\Category;
+use App\Models\emas\Unit;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
-class KategoriController extends Controller
+
+class SatuanController extends Controller
 {
-     /**
+      /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $model = Category::orderBy('created_at', 'DESC')
+        $model = Unit::orderBy('created_at', 'DESC')
         ->orderBy('updated_at', 'DESC')
         ->get();
-        return view('admin.kategori.index',compact('model'));
+        return view('admin.satuan.index',compact('model'));
     }
 
     /**
@@ -30,7 +31,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('admin.kategori.create');
+        return view('admin.satuan.create');
     }
 
     /**
@@ -43,15 +44,17 @@ class KategoriController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'short_code'=>'required'
         ]);
 
-        Category::create([
+        Unit::create([
             'name' => $request->name,
+            'short_code' => $request->short_code,
             'user_id'=>Auth::user()->id
         ]);
 
         Alert::success('success', ' Berhasil Input Data !');
-        return redirect('kategori');
+        return redirect('satuan');
 
     }
 
@@ -76,8 +79,8 @@ class KategoriController extends Controller
     {
         $data = Crypt::decryptString($id);
         // dd($data);
-        $model = Category::find($data);
-        return view('admin.kategori.edit', [
+        $model = Unit::find($data);
+        return view('admin.satuan.edit', [
             'id' => $id,
             'model' => $model
         ]);
@@ -96,13 +99,15 @@ class KategoriController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
+            'short_code'=>'required'
         ]);
 
-        $model = Category::find($id);
+        $model = Unit::find($id);
         $model->name = $request->name;
+        $model->short_code = $request->short_code;
         $model->save();
         Alert::success('success', ' Berhasil Update Data !');
-        return redirect(route('kategori.index'));
+        return redirect(route('satuan.index'));
     }
 
     /**
@@ -115,10 +120,10 @@ class KategoriController extends Controller
     {
         $data = Crypt::decryptString($id);
         
-        $model = Category::find($data);
+        $model = Unit::find($data);
         $model->delete();
 
         Alert::success('success', ' Berhasil Hapus Data !');
-        return redirect('kategori');
+        return redirect('satuan');
     }
 }

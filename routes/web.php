@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\LokasiController;
+use App\Http\Controllers\Admin\SatuanController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CutiController;
@@ -400,6 +401,10 @@ Route::group(['middleware' => ['auth']], function () {
     // kategori
     Route::resource('kategori', KategoriController::class);
     Route::get('/kategori/destroy/{data}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+
+    // satuan
+    Route::resource('satuan', SatuanController::class);
+    Route::get('/satuan/destroy/{data}', [SatuanController::class, 'destroy'])->name('satuan.destroy');
 
     
 });

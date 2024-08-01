@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\emas;
 
 use App\Enums\TaxType;
 use Illuminate\Database\Eloquent\Model;
@@ -41,7 +41,6 @@ class Product extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-        'tax_type' => TaxType::class
     ];
 
     public function getRouteKeyName(): string
@@ -79,21 +78,7 @@ class Product extends Model
         return $this->belongsTo(Location::class, 'id_toko', 'id');
     }
 
-    protected function buyingPrice(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
-        );
-    }
 
-    protected function sellingPrice(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
-        );
-    }
 
     public function scopeSearch($query, $value): void
     {
@@ -107,6 +92,6 @@ class Product extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo('App\Models\Pegawai', 'id_user', 'id');
     }
 }

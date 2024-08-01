@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\KaratController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\LokasiController;
+use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\SatuanController;
+use App\Http\Controllers\Admin\TipeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CutiController;
@@ -406,7 +409,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('satuan', SatuanController::class);
     Route::get('/satuan/destroy/{data}', [SatuanController::class, 'destroy'])->name('satuan.destroy');
 
-    
+    // karat
+    Route::resource('karat', KaratController::class);
+    Route::get('/karat/destroy/{data}', [KaratController::class, 'destroy'])->name('karat.destroy');
+
+     // tipe
+     Route::resource('tipe', TipeController::class);
+     Route::get('/tipe/destroy/{data}', [TipeController::class, 'destroy'])->name('tipe.destroy');
+  
+      // tipe
+      Route::resource('produk', ProdukController::class);
+      Route::get('/produk/destroy/{data}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+ 
 });
 
 Auth::routes();

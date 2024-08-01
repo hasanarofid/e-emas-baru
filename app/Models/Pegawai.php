@@ -35,7 +35,8 @@ class Pegawai extends Authenticatable
         'id_atasan',
         'id_jabatan',
         'id_divisi',
-        'path'
+        'path',
+        'id_toko'
     ];
 
     protected $dates = ['deleted_at'];
@@ -80,9 +81,10 @@ class Pegawai extends Authenticatable
         return $this->hasMany('App\Models\SuratPeringatan');
     }
 
-
-
-
+    public function toko()
+    {
+        return $this->hasMany('App\Models\emas\Location', 'id_toko', 'id');
+    }
 
 
     public function jabatan()

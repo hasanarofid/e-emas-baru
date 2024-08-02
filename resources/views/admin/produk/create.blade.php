@@ -55,21 +55,230 @@
                 </div>
 
                 <div class="row">
-                    
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">Nama</label>
-                            <input type="text" name="name" class="form-control" placeholder="Nama Produk . . . "
-                                value="{{ old('name') }}">
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">
+                                    {{ __('Product Image') }}
+                                </h3>
 
-                            @if ($errors->has('name'))
-                                <div class="text-danger">
-                                    {{ $errors->first('name') }}
+                                <img class="img-account-profile mb-2" src="{{ URL::to('/admin/assets/images/brands/emas.png') }}" alt="" id="image-preview" width="160px" />
+
+                                <div class="small font-italic text-muted mb-2">
+                                    JPG or PNG no larger than 2 MB
                                 </div>
-                            @endif
+
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    id="image"
+                                    name="product_image"
+                                    class="form-control @error('product_image') is-invalid @enderror"
+                                    onchange="previewImage();"
+                                >
+
+                                @error('product_image')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Nama</label>
+                                            <input type="text" name="name" class="form-control" placeholder="Nama Produk . . . "
+                                                value="{{ old('name') }}">
+
+                                            @if ($errors->has('name'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('name') }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Kategori</label>
+                                            <select name="category_id" id="category_id"
+                                            class="form-control @error('category_id') is-invalid @enderror">
+                                            <option value="" selected="" disabled="">
+                                                .: Pilih :.
+                                                </option>
+
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}" @if(old('category_id') == $category->id) selected="selected" @endif>
+                                                        {{ $category->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                    
+                                            @if ($errors->has('category_id'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('category_id') }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Pilih Satuan</label>
+                                            <select name="unit_id" id="unit_id"
+                                            class="form-control @error('unit_id') is-invalid @enderror">
+                                            <option value="" selected="" disabled="">
+                                                    .: Pilih :.
+                                                </option>
+
+                                                @foreach ($units as $unit)
+                                                    <option value="{{ $unit->id }}" @if(old('unit_id') == $unit->id) selected="selected" @endif>{{ $unit->name }}</option>
+                                                @endforeach
+                                            </select>
+
+                                            @if ($errors->has('unit_id'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('unit_id') }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Pilih Karat</label>
+                                            <select name="id_karat" id="id_karat"
+                                            class="form-control @error('id_karat') is-invalid @enderror">
+                                            <option value="" selected="" disabled="">
+                                                    .: Pilih :.
+                                                </option>
+
+                                                @foreach ($karat as $val)
+                                                    <option value="{{ $val->id }}" @if(old('id_karat') == $val->id) selected="selected" @endif>
+                                                        {{ $val->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
+
+                                            @if ($errors->has('id_karat'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('id_karat') }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Pilih Tipe</label>
+                                            <select name="id_tipe" id="id_tipe"
+                                            class="form-control @error('id_tipe') is-invalid @enderror">
+                                            <option value="" selected="" disabled="">
+                                                    .: Pilih :.
+                                                </option>
+
+                                                @foreach ($tipe as $tip)
+                                                    <option value="{{ $tip->id }}" @if(old('id_tipe') == $tip->id) selected="selected" @endif>{{ $tip->name }}</option>
+                                                @endforeach
+                                            </select>
+
+
+                                            @if ($errors->has('id_tipe'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('id_tipe') }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Pilih Rak</label>
+                                            <select name="id_rak" id="id_rak"
+                                            class="form-control @error('id_rak') is-invalid @enderror">
+                                            <option value="" selected="" disabled="">
+                                                    .: Pilih :.
+                                                </option>
+
+                                                @foreach ($rak as $value)
+                                                    <option value="{{ $value->id }}" @if(old('id_rak') == $value->id) selected="selected" @endif>{{ $value->name }}</option>
+                                                @endforeach
+                                            </select>
+
+
+                                            @if ($errors->has('id_rak'))
+                                                <div class="text-danger">
+                                                    {{ $errors->first('id_rak') }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Harga Beli</label>
+                                            <input class="form-control" value="{{ old('buying_price') }}"  type="text" name="buying_price" id="buying_price" required="required" placeholder="0" >
+                                       
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Harga Jual</label>
+                                            <input class="form-control" value="{{ old('selling_price') }}"  type="text" name="selling_price" id="selling_price" required="required" placeholder="0" >
+                                       
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Quantity / Jumlah</label>
+                                            <input type="text"
+                                            label="Quantity"
+                                            name="quantity"
+                                            id="quantity"
+                                            class="form-control"
+                                            placeholder="0"
+                                            value="{{ old('quantity') }}" >
+                                       
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="notes" class="form-label">
+                                                {{ __('Notes') }}
+                                            </label>
+
+                                            <textarea name="notes"
+                                                      id="notes"
+                                                      rows="5"
+                                                      class="form-control @error('notes') is-invalid @enderror"
+                                                      placeholder="Product notes"
+                                            ></textarea>
+
+                                            @error('notes')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
+                                    
+                            </div>
+                        </div>
+                    </div>
+
                     
+              
+
 
 
                 </div>
@@ -88,11 +297,18 @@
 @section('custom_script')
 
     <script>
-        var rupiah = document.getElementById("rupiah");
+        var rupiah = document.getElementById("selling_price");
         rupiah.addEventListener("keyup", function(e) {
             // tambahkan 'Rp.' pada saat form di ketik
             // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
             rupiah.value = formatRupiah(this.value, "Rp. ");
+        });
+
+        var buying_price = document.getElementById("buying_price");
+        buying_price.addEventListener("keyup", function(e) {
+            // tambahkan 'Rp.' pada saat form di ketik
+            // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+            buying_price.value = formatRupiah(this.value, "Rp. ");
         });
 
         /* Fungsi formatRupiah */
@@ -112,6 +328,41 @@
             rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
             return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
         }
+
+
+        $('#quantity').on('input', function() {
+                // Remove any non-numeric characters
+                this.value = this.value.replace(/\D/g, '');
+            });
+
+            $('#quantity').on('keydown', function(e) {
+                // Allow: backspace, delete, tab, escape, enter
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
+                    // Allow: Ctrl/cmd+A
+                    (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                    // Allow: home, end, left, right
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+            function previewImage() {
+    const image = document.querySelector("#image");
+    const imagePreview = document.querySelector("#image-preview");
+
+    const oFReader = new FileReader();
+    oFReader.readAsDataURL(image.files[0]);
+
+    oFReader.onload = function (oFREvent) {
+        imagePreview.src = oFREvent.target.result;
+    };
+}
+
 
     </script>
 

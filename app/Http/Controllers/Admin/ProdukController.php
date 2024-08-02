@@ -3,11 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\emas\Category;
+use App\Models\emas\Karat;
 use App\Models\emas\Product;
+use App\Models\emas\Rack;
+use App\Models\emas\Type;
+use App\Models\emas\Unit;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\SUpport\Str;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class ProdukController extends Controller
 {
@@ -37,7 +45,19 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        return view('admin.produk.create');
+        $auth = Auth::user();
+        $categories = Category::get(['id', 'name']);
+        $units = Unit::get(['id', 'name']);
+        $karat = Karat::get(['id', 'name']);
+        $tipe = Type::get(['id', 'name']);
+        $rak = Rack::where('id_toko',$auth->id_toko)->get(['id', 'name']);
+        return view('admin.produk.create',[
+            'categories' => $categories,
+            'units' => $units,
+            'karat' => $karat,
+            'tipe' => $tipe,
+            'rak' => $rak,
+        ]);
     }
 
     /**
@@ -48,12 +68,59 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
             'name' => 'required',
-        ]);
+            'quantity' => 'required',
+            'buying_price' => 'required',
+            'selling_price' => 'required',
+            'id_tipe' => 'required',
+            'product_image' => 'required|file:jpeg,png,jpg|max:5000',
 
+        ]);
+      // Get the file extension
+        $extension = $request->file('product_image')->extension();
+
+        // Create a unique file name
+        $docname = $request->txtBarang . '_' . date('dmyHi') . '.' . $extension;
+
+  
+        $path = Storage::putFileAs('public/images/produk/', $request->file('product_image'), $docname);
+
+        $code = IdGenerator::generate([
+            'table' => 'products',
+            'field' => 'code',
+            'length' => 10,
+            'prefix' => 'PROD-'
+        ]);
+        $buying_price2 = $request->buying_price;
+        $buying_price_string = preg_replace("/[^0-9]/", "", $buying_price2);
+        $buying_price = (int) $buying_price_string;
+
+        $selling_price2 = $request->selling_price;
+        $selling_price_string = preg_replace("/[^0-9]/", "", $selling_price2);
+        $selling_price = (int) $selling_price_string;
+        // dd($selling_price);
         Product::create([
-            'name' => $request->name
+            'name' => $request->name,
+            'product_image' => $docname,
+            "slug" => Str::slug($request->name, '-'),
+            "uuid" => Str::uuid(),
+            'user_id'=>Auth::user()->id,
+            'code'=>$code,
+            'quantity'=>$request->quantity,
+            'buying_price'=>$buying_price,
+            'selling_price'=>$selling_price,
+            'quantity_alert'=>1,
+            'tax'=>0,
+            'tax_type'=>0,
+            'notes'=>$request->notes,
+            'category_id'=>$request->category_id,
+            'unit_id'=>$request->unit_id,
+            'id_toko'=>Auth::user()->id_toko,
+            'id_karat'=>$request->id_karat,
+            'id_rak'=>$request->id_rak,
+            'id_tipe'=>$request->id_tipe,
         ]);
 
         Alert::success('success', ' Berhasil Input Data !');

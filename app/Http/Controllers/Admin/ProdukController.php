@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\emas\Category;
 use App\Models\emas\Karat;
+use App\Models\emas\OrderDetails;
 use App\Models\emas\Product;
 use App\Models\emas\Rack;
 use App\Models\emas\Type;
@@ -79,14 +80,37 @@ class ProdukController extends Controller
 
         ]);
       // Get the file extension
-        $extension = $request->file('product_image')->extension();
+        // $extension = $request->file('product_image')->extension();
 
         // Create a unique file name
-        $docname = $request->txtBarang . '_' . date('dmyHi') . '.' . $extension;
-
+        // $docname = $request->txtBarang . '_' . date('dmyHi') . '.' . $extension;
+        // $path = $request->file('product_image')->store('images/produk', 'public');
   
-        $path = Storage::putFileAs('public/images/produk/', $request->file('product_image'), $docname);
-
+        // $path = Storage::putFileAs('public/images/produk/', $request->file('product_image'), $docname);
+        if ($request->hasFile('product_image')) {
+            $file = $request->file('product_image');
+            $image = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
+            $directory = 'images/products';
+            
+            // Pastikan folder ada, jika tidak buat folder baru
+            if (!file_exists(public_path($directory))) {
+                mkdir(public_path($directory), 0777, true);
+                // Ubah izin akses folder
+                chmod(public_path($directory), 0777);
+            }
+        
+            // Pastikan file diunggah dengan benar
+            if ($file->isValid()) {
+                // Pindahkan file ke direktori yang ditentukan
+                if (move_uploaded_file($file->getPathname(), public_path($directory . '/' . $image))) {
+                    // File berhasil diunggah
+                } else {
+                    // Jika gagal menyimpan file
+                    dd("Gagal menyimpan file.");
+                }
+            } 
+        }
+        
         $code = IdGenerator::generate([
             'table' => 'products',
             'field' => 'code',
@@ -103,7 +127,8 @@ class ProdukController extends Controller
         // dd($selling_price);
         Product::create([
             'name' => $request->name,
-            'product_image' => $docname,
+            // 'product_image' => $docname,
+            'product_image'=>$image,
             "slug" => Str::slug($request->name, '-'),
             "uuid" => Str::uuid(),
             'user_id'=>Auth::user()->id,
@@ -141,9 +166,20 @@ class ProdukController extends Controller
         $data = Crypt::decryptString($id);
         // dd($data);
         $model = Product::find($data);
+         $auth = Auth::user();
+        $categories = Category::get(['id', 'name']);
+        $units = Unit::get(['id', 'name']);
+        $karat = Karat::get(['id', 'name']);
+        $tipe = Type::get(['id', 'name']);
+        $rak = Rack::where('id_toko',$auth->id_toko)->get(['id', 'name']);
         return view('admin.produk.edit', [
             'id' => $id,
-            'model' => $model
+            'model' => $model,
+            'categories' => $categories,
+            'units' => $units,
+            'karat' => $karat,
+            'tipe' => $tipe,
+            'rak' => $rak,
         ]);
     }
 
@@ -160,10 +196,56 @@ class ProdukController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
+            'quantity' => 'required',
+            'buying_price' => 'required',
+            'selling_price' => 'required',
+            'id_tipe' => 'required',
+            'product_image' => 'required|file:jpeg,png,jpg|max:5000',
         ]);
-
         $model = Product::find($id);
+        if ($request->hasFile('product_image')) {
+            $file = $request->file('product_image');
+            $image = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
+            $directory = 'images/products';
+            
+            // Pastikan folder ada, jika tidak buat folder baru
+            if (!file_exists(public_path($directory))) {
+                mkdir(public_path($directory), 0777, true);
+                // Ubah izin akses folder
+                chmod(public_path($directory), 0777);
+            }
+        
+            // Pastikan file diunggah dengan benar
+            if ($file->isValid()) {
+                // Pindahkan file ke direktori yang ditentukan
+                if (move_uploaded_file($file->getPathname(), public_path($directory . '/' . $image))) {
+                    // File berhasil diunggah
+                } else {
+                    // Jika gagal menyimpan file
+                    dd("Gagal menyimpan file.");
+                }
+            } 
+            $model->product_image = $image;
+        }
+
+        $buying_price2 = $request->buying_price;
+        $buying_price_string = preg_replace("/[^0-9]/", "", $buying_price2);
+        $buying_price = (int) $buying_price_string;
+
+        $selling_price2 = $request->selling_price;
+        $selling_price_string = preg_replace("/[^0-9]/", "", $selling_price2);
+        $selling_price = (int) $selling_price_string;
+
         $model->name = $request->name;
+        $model->quantity = $request->quantity;
+        $model->buying_price = $buying_price;
+        $model->selling_price = $selling_price;
+        $model->notes = $request->notes;
+        $model->category_id = $request->category_id;
+        $model->unit_id = $request->unit_id;
+        $model->id_karat = $request->id_karat;
+        $model->id_rak = $request->id_rak;
+        $model->id_tipe = $request->id_tipe;
         $model->save();
         Alert::success('success', ' Berhasil Update Data !');
         return redirect(route('produk.index'));
@@ -180,6 +262,16 @@ class ProdukController extends Controller
         $data = Crypt::decryptString($id);
         
         $model = Product::find($data);
+
+        $isUsed = OrderDetails::where('product_id', $data)->exists();
+        // dd($isUsed);
+        if ($isUsed) {
+            Alert::success('error', ' Data tidak bisa dihapus karena masih digunakan di tabel lain. !');
+         return redirect('produk');
+           
+        }
+
+
         $model->delete();
 
         Alert::success('success', ' Berhasil Hapus Data !');

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CutiController;
 use App\Http\Controllers\LaporanUmumController;
+use App\Http\Controllers\StorageLinkController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\JabatanController;
@@ -81,6 +82,11 @@ Route::get('/clear-cache', function() {
     return "Cache is cleared";
 });
 
+Route::get('/run-storage-link', function () {
+    $output = Artisan::call('storage:link');
+    return '<pre>' . Artisan::output() . '</pre>';
+});
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -103,7 +109,7 @@ Route::post('/forget-password/postEmail', [ForgotPasswordController::class, 'pos
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'getPassword'])->name('reset-password.getPassword');
 Route::post('/reset-password', [ResetPasswordController::class, 'updatePassword'])->name('reset-password.updatePassword');
 
-
+Route::middleware(['auth'])->get('/run-storage-link', [StorageLinkController::class, 'run']);
 Route::group(['middleware' => ['auth']], function () {
 
     //Search

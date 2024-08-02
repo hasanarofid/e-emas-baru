@@ -75,8 +75,11 @@
                                 <td>{{ $i++ }}</td>
                                 <td>
                                     <div class="text-center">
-                                        @php $path =Storage::url('images/produk/'.$p->product_image); @endphp
-                                        <img src="{{ url($path) }}"
+                                        
+                                        @php 
+                                        $path = asset('images/products/' . $p->product_image);
+                                        @endphp
+                                        <img src="{{ $path }}"
                                             onerror="this.onerror=null; this.src='{{ URL::to('/admin/assets/images/brands/emas.png') }}'"
                                             alt="product_image" width="160">
                                     </div>

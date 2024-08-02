@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\emas;
 
 use Attribute;
 use Illuminate\Database\Eloquent\Model;

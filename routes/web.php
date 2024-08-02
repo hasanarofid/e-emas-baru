@@ -3,8 +3,11 @@
 use App\Http\Controllers\Admin\KaratController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\LokasiController;
+use App\Http\Controllers\Admin\PelangganController;
 use App\Http\Controllers\Admin\ProdukController;
+use App\Http\Controllers\Admin\RakController;
 use App\Http\Controllers\Admin\SatuanController;
+use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\TipeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Controller;
@@ -423,9 +426,21 @@ Route::group(['middleware' => ['auth']], function () {
      Route::resource('tipe', TipeController::class);
      Route::get('/tipe/destroy/{data}', [TipeController::class, 'destroy'])->name('tipe.destroy');
   
-      // tipe
+      // produk
       Route::resource('produk', ProdukController::class);
       Route::get('/produk/destroy/{data}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+
+       // rak
+       Route::resource('rak', RakController::class);
+       Route::get('/rak/destroy/{data}', [RakController::class, 'destroy'])->name('rak.destroy');
+
+       // pelanggan
+       Route::resource('pelanggan', PelangganController::class);
+       Route::get('/pelanggan/destroy/{data}', [PelangganController::class, 'destroy'])->name('pelanggan.destroy');
+
+         // supplier
+         Route::resource('supplier', SupplierController::class);
+         Route::get('/supplier/destroy/{data}', [SupplierController::class, 'destroy'])->name('supplier.destroy');
  
 });
 

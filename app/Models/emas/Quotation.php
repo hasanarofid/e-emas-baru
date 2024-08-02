@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\emas;
 
 use App\Enums\QuotationStatus;
 use Attribute;

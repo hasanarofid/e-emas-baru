@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\emas;
 
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;

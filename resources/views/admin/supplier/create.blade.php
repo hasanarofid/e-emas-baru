@@ -1,6 +1,6 @@
 @extends('layout.base')
 
-@section('title', 'Data Pelanggan')
+@section('title', 'Data Supplier')
 
 
 @section('content_header')
@@ -8,19 +8,19 @@
         <div class="page-header-content">
             <div class="page-title">
                 <h4><i class="icon-cash3"></i> <span class="text-semibold">Data Master Toko/Cabang</span>
-                    - Tambah Data Pelanggan</h4>
+                    - Tambah Data Supplier</h4>
             </div>
 
         </div>
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li><a href="{{ route('pelanggan.index') }}"><i class="active icon-home2 position-left"></i> List
+                <li><a href="{{ route('supplier.index') }}"><i class="active icon-home2 position-left"></i> List
                         Data
-                        Pelanggan</a>
+                        Supplier</a>
                 </li>
 
-                <li class="active">Tambah Data Pelanggan</li>
+                <li class="active">Tambah Data Supplier</li>
                 {{-- <li class="active">Dashboard</li> --}}
             </ul>
         </div>
@@ -32,7 +32,7 @@
     <div class="panel bg-info">
         <div class="panel-heading">
             <em>
-                <h6> Halaman ini berguna apabila anda ingin menambah Pelanggan  baru</h6>
+                <h6> Halaman ini berguna apabila anda ingin menambah Supplier  baru</h6>
             </em>
             <div class="heading-elements">
                 <ul class="icons-list">
@@ -43,7 +43,7 @@
         </div>
     </div>
 
-    <form method="post" enctype="multipart/form-data" action="{{ route('pelanggan.store') }}">
+    <form method="post" enctype="multipart/form-data" action="{{ route('supplier.store') }}">
         {{ csrf_field() }}
         {{ method_field('POST') }}
     
@@ -85,7 +85,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">Nama</label>
-                                    <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Pelanggan . . . " value="{{ old('name') }}">
+                                    <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Supplier . . . " value="{{ old('name') }}">
                                     @error('name')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror

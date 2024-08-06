@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\KaratController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\LokasiController;
 use App\Http\Controllers\Admin\PelangganController;
+use App\Http\Controllers\Admin\PenjualanController;
 use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\RakController;
 use App\Http\Controllers\Admin\SatuanController;
@@ -441,6 +442,13 @@ Route::group(['middleware' => ['auth']], function () {
          // supplier
          Route::resource('supplier', SupplierController::class);
          Route::get('/supplier/destroy/{data}', [SupplierController::class, 'destroy'])->name('supplier.destroy');
+
+        // penjualan
+        Route::resource('penjualan', PenjualanController::class);
+        Route::get('/penjualan/list', [PenjualanController::class, 'list'])->name('penjualan.list');
+        Route::post('/penjualan/create_order', [PenjualanController::class, 'create_order'])->name('penjualan.create_order');
+        
+        // Route::get('/penjualan/destroy/{data}', [PenjualanController::class, 'destroy'])->name('penjualan.destroy');
  
 });
 

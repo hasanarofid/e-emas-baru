@@ -129,8 +129,9 @@
                     @yield('content')
 
                     <!-- Footer -->
-                    <div class="footer text-muted">&copy; {{ date('Y') }}. <a href="#">POS E-Emas</a> by <a
-                            href="#" target="_blank">Bimantoro</a>
+                    <div class="footer text-muted">&copy; {{ date('Y') }}. <a href="#">POS E-Emas</a> 
+                        {{-- by <a
+                            href="#" target="_blank">Bimantoro</a> --}}
                     </div>
                     <!-- /footer -->
 

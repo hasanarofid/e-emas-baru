@@ -75,26 +75,27 @@
                                         <div class="col-12">
                                             <div class="row">
                                                 @foreach($products as $product)
-                                                    <div class="col-md-2 col-lg-2 mb-1 product-card" data-category="{{ $product->category->slug }}" data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-code="{{ $product->code }}" data-stock="{{ $product->quantity }}" data-selling_price="{{ $product->selling_price }}">
-                                                        <div class="card h-100">
-                                                            @php 
-                                                                $path = asset('images/products/' . $product->product_image);
-                                                            @endphp
-                                                            <img src="{{ $path }}"
-                                                                onerror="this.onerror=null; this.src='{{ URL::to('/admin/assets/images/brands/emas.png') }}'"
-                                                                alt="product_image" class="card-img-top-kita product-img">
-                                                            <div class="card-body">
-                                                                <p class="card-title2">{{ $product->name }} - {{ $product->code }} (Rp. {{ formatRupiah($product->selling_price) }})</p>
-                                                            </div>
-                                                            <div class="card-footer">
-                                                                <div class="btn-group">
-                                                                    <a href="#" class="btn btn-primary add-item-btn">Add Item <i class="fas fa-plus-circle"></i></a>
-                                                                    <input type="number" name="qty[]" value="1" class="form-control qty-input d-none nomor2">
-                                                                </div>
+                                                <div class="col-md-3 col-lg-3 mb-3 product-card" data-category="{{ $product->category->slug }}" data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-code="{{ $product->code }}" data-stock="{{ $product->quantity }}" data-selling_price="{{ $product->selling_price }}">
+                                                    <div class="card h-100">
+                                                        @php 
+                                                            $path = asset('images/products/' . $product->product_image);
+                                                        @endphp
+                                                        <img src="{{ $path }}"
+                                                            onerror="this.onerror=null; this.src='{{ URL::to('/admin/assets/images/brands/emas.png') }}'"
+                                                            alt="product_image" class="card-img-top-kita product-img">
+                                                        <div class="card-body">
+                                                            <p class="card-title2">{{ $product->name }} - {{ $product->code }} (Rp. {{ formatRupiah($product->selling_price) }})</p>
+                                                        </div>
+                                                        <div class="card-footer">
+                                                            <div class="btn-group">
+                                                                <a href="#" class="btn add-item-btn">Add <i class="fa fa-plus-circle"></i></a>
+                                                                <input type="text" name="qty[]" value="1" class="form-control qty-input d-none nomor2">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endforeach
+                                                </div>
+                                            @endforeach
+                                            
                                             </div>
                                         </div>
                                     </div>
